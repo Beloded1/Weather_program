@@ -1,9 +1,8 @@
-from fastapi.testclient import TestClient
-from weather_program.schemas import Weather, OpenweathermapClient
-from fastapi.testclient import TestClient
-from weather_program.server import app
 from datetime import date
 
+from fastapi.testclient import TestClient
+from weather_program.schemas import Weather
+from weather_program.server import app
 
 client = TestClient(app)
 
@@ -40,7 +39,7 @@ def test__weather_forecast():
 
 def test__current_weather__with_mock(mock_ovm_client):
     mock_weather = Weather(
-        date='2022-01-01',
+        date=date(2022, 1, 1),
         temperature=25.0,
         wind_speed=5.0,
         humidity=70
@@ -62,7 +61,7 @@ def test__current_weather__with_mock(mock_ovm_client):
 def test__weather_forecast__with_mock(mock_ovm_client):
     mock_forecast = [
         Weather(
-            date=date(2022, 1, 2),
+            date=date(2022, 1, 1),
             temperature=25.0,
             wind_speed=5.0,
             humidity=70

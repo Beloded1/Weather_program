@@ -1,8 +1,10 @@
 from datetime import date, datetime
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel
+from typing import List
+
 import requests
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import HTTPException
+from pydantic import BaseModel
+
 
 class Weather(BaseModel):
     date: datetime | date
@@ -10,15 +12,18 @@ class Weather(BaseModel):
     wind_speed: None | float
     humidity: None | int
 
+
 class Config(BaseModel):
     api_key: str
 
+
 class OpenweathermapClient:
+
     def __init__(self, config: Config, url: str) -> None:
         self.config = config
         self.url = url
 
-    def get_current_weather(self, city: str, units: str) -> Weather:
+    def get_current_weather(self, city: str, units: str | None) -> Weather:
         url = f'{self.url}/weather'
         try:
             query = {'q': city, 'appid': self.config.api_key}
@@ -36,7 +41,7 @@ class OpenweathermapClient:
         except requests.exceptions.RequestException as e:
             raise HTTPException(status_code=400, detail=str(e))
 
-    def get_weather_forecast(self, city: str, units: str) -> List[Weather]:
+    def get_weather_forecast(self, city: str, units: str | None) -> List[Weather]:
         url = f'{self.url}/forecast'
         try:
             query = {'q': city, 'appid': self.config.api_key}
@@ -51,7 +56,7 @@ class OpenweathermapClient:
             forecast = []
 
             for item in forecast_data:
-                date = datetime.strptime(item['dt_txt'], "%Y-%m-%d %H:%M:%S")
+                date = datetime.strptime(item['dt_txt'], '%Y-%m-%d %H:%M:%S')
                 temperature = item['main']['temp']
                 wind_speed = item['wind']['speed']
                 humidity = item['main']['humidity']
