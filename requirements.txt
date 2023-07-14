@@ -10,3 +10,5 @@ flake8-unused-arguments==0.0.13
 flake8-quotes==3.3.2
 flake8-print==5.0.0
 httpx==0.24.1
+pytest-dotenv
+pytest-clarity
