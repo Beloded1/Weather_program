@@ -1,9 +1,13 @@
-FROM python:3.10.8-slim
+FROM python:3.11.0-alpine3.16
+
 WORKDIR /app
 
-# install requirements
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+RUN python -m pip install --upgrade pip
 
-ENV PORT=8000
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+COPY requirements.txt /app/
+
+RUN python -m pip install -r requirements.txt
+
+COPY app /app/app
+
+ENTRYPOINT ["python", "-m", "app"]
