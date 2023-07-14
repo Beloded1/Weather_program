@@ -12,3 +12,4 @@ flake8-print==5.0.0
 httpx==0.24.1
 pytest-dotenv
 pytest-clarity
+uvicorn
