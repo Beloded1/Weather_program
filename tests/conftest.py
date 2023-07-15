@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
 import pytest
-from weather_program.schemas import OpenweathermapClient
+from weather_program.owm import OpenweathermapClient
 
 
 @pytest.fixture

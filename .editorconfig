@@ -24,3 +24,7 @@ indent_size = 2
 # Use 2 spaces for the jml files
 [*.yml]
 indent_size = 2
+
+[Makefile]
+indent_style = tab
+indent_size = 4

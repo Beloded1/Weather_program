@@ -17,7 +17,7 @@ def test_weather_forecast_error():
     assert response.status_code == 422
 
     error_detail = response.json()['detail']
-    assert error_detail[0]['msg'] == "field required"
+    assert error_detail[0]['msg'] == "Field required"
 
 
 def test__weather_forecast():

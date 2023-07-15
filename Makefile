@@ -2,10 +2,10 @@ style:
 	flake8 .
 
 types:
-	mypy app
+	mypy weather_program
 
-tests:
+test:
 	python -m pytest
 
 check:
-    make -j3 style types tests
+	make -j3 style types test
