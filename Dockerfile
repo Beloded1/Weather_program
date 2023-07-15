@@ -8,6 +8,6 @@ COPY requirements.txt /app/
 
 RUN python -m pip install -r requirements.txt
 
-COPY app /app/app
+COPY weather_program /app/weather_program
 
-ENTRYPOINT ["python", "-m", "app"]
+CMD ["uvicorn", "weather_program.server:app", "--host", "0.0.0.0"]

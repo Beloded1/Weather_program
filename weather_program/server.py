@@ -2,11 +2,16 @@ import os
 from typing import Any, Dict
 
 from fastapi import FastAPI, HTTPException, Query
-from weather_program.schemas import Config, OpenweathermapClient, Weather
+from weather_program.config import Config
+from weather_program.owm import OpenweathermapClient
+from weather_program.schemas import Weather
 
 app = FastAPI()
 config = Config(api_key=os.environ['MYAPP_OPEN_WEATHER_KEY'])
-ovm_client = OpenweathermapClient(config, url='http://api.openweathermap.org/data/2.5')
+ovm_client = OpenweathermapClient(
+    api_key=config.api_key,
+    url='http://api.openweathermap.org/data/2.5',
+)
 
 
 @app.get('/current_weather')

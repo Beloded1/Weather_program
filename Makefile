@@ -2,10 +2,10 @@ style:
 	flake8 .
 
 types:
-	mypy app
+	mypy weather_program
 
-tests:
-	python -m pytest
+test:
+	python -m pytest -m "not owm"
 
 check:
-    make -j3 style types tests
+	make -j3 style types test

@@ -1,4 +1,5 @@
 from datetime import date
+import pytest
 
 from fastapi.testclient import TestClient
 from weather_program.schemas import Weather
@@ -6,20 +7,22 @@ from weather_program.server import app
 
 client = TestClient(app)
 
-
+@pytest.mark.owm
 def test__current_weather__if_get_invalid_city():
     response = client.get("/current_weather?city=InvalidCity")
     assert response.status_code == 400
 
 
+@pytest.mark.owm
 def test_weather_forecast_error():
     response = client.get("/weather_forecast")
     assert response.status_code == 422
 
     error_detail = response.json()['detail']
-    assert error_detail[0]['msg'] == "field required"
+    assert error_detail[0]['msg'] == "Field required"
 
 
+@pytest.mark.owm
 def test__weather_forecast():
     response = client.get("/weather_forecast?city=Anapa")
     assert response.status_code == 200
