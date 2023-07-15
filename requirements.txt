@@ -10,6 +10,7 @@ flake8-unused-arguments==0.0.13
 flake8-quotes==3.3.2
 flake8-print==5.0.0
 httpx==0.24.1
-pytest-dotenv
+pytest-dotenv==0.5.2
 pytest-clarity
-uvicorn
+uvicorn==0.22.0
+pydantic==1.6.2
